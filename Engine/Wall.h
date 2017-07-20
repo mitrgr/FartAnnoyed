@@ -2,7 +2,7 @@
 #include "Rect.h"
 #include "Graphics.h"
 
-class Wall: protected Rect
+class Wall: public Rect
 {
 public:
 	Wall(float x, float y, const float h, const float w);

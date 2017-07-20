@@ -28,9 +28,22 @@ void Ball::ChangeDirX(bool cange)
 	}
 }
 
-void Ball::UpdatePos(float dt)
+void Ball::UpdatePos(float dt, const Rect& border)
 {
 	center += Dir.GetNormalized()*dt*Speed;
+
+	if (GetUR().x > border.GetUR().x) {
+		center -= Vec2(GetUR().x - border.GetUR().x, 0);
+	}
+	if (GetUR().y < border.GetUR().y) {
+		center -= Vec2(0,GetUR().y - border.GetUR().y);
+	}
+	if (GetDL().y > border.GetDL().y) {
+		center -= Vec2(0,GetDL().y - border.GetDL().y);
+	}
+	if (GetDL().x < border.GetDL().x) {
+		center -= Vec2(GetDL().x - border.GetDL().x,0);
+	}
 }
 
 void Ball::Draw(Graphics& gfx) const

@@ -13,7 +13,7 @@ public:
 	void ChangeDirY(bool cange);
 	void ChangeDirX(bool cange);
 
-	void UpdatePos(float dt);
+	void UpdatePos(float dt, const Rect& border);
 	void Draw(Graphics& gfx) const;
 
 private:
