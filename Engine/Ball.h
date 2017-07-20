@@ -11,7 +11,7 @@ public:
 
 	
 	void UpdatePos();
-	void Draw(Graphics gfx) const;
+	void Draw(Graphics& gfx) const;
 
 
 

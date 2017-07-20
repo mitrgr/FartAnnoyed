@@ -13,7 +13,7 @@ void Ball::UpdatePos()
 	center += Dir.GetNormalized();
 }
 
-void Ball::Draw(Graphics gfx) const
+void Ball::Draw(Graphics& gfx) const
 {
 	SpriteCodex::DrawBall(center, gfx);
 }
