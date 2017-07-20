@@ -19,7 +19,7 @@ public:
 	const Color GetC() const;
 
 
-private:
+protected:
 	Vec2 center;
 	const float Height, Width;
 	Color Col;
