@@ -27,7 +27,8 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ball(300.0f,200.0f),
 	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)(Graphics::ScreenHeight-100), (float)(Graphics::ScreenWidth-400) ),
-	pad(300.0f, 500.0f)
+	pad(300.0f, 500.0f),
+	bricks(300.0f, 100.0f, {255,0,0})
 {
 }
 
@@ -65,14 +66,29 @@ void Game::UpdateModel()
 		canBeChanged = false;
 		Updatecount = 0;
 	}
+	bool b;
+	bricks.Update(ball, b);
+
+	if (canBeChanged && ((bricks.HitBallBottom(ball) || bricks.HitBallTop(ball)))) {
+		ball.ChangeDirY((bricks.HitBallBottom(ball) || bricks.HitBallTop(ball)));
+		canBeChanged = false;
+		Updatecount = 0;
+	}
+	if (canBeChanged && (bricks.HitBallLeft(ball) || bricks.HitBallRight(ball))) {
+		ball.ChangeDirX((bricks.HitBallLeft(ball) || bricks.HitBallRight(ball)));
+		canBeChanged = false;
+		Updatecount = 0;
+	}
+
 
 }
 
 void Game::ComposeFrame()
 {
-	
+	bricks.Draw(gfx);
 	ball.Draw(gfx);
 	pad.Draw(gfx);
 	wall.Draw(gfx);
+
 
 }

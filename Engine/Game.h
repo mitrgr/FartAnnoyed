@@ -27,6 +27,7 @@
 #include "FrameTimer.h"
 #include "Wall.h"
 #include "Pad.h"
+#include "Brick.h"
 
 class Game
 {
@@ -50,6 +51,7 @@ private:
 	FrameTimer ft;
 	Wall wall;
 	Pad pad;
+	Brick bricks;
 	float Updatecount=0.0f;
 	const float DelayTimer = 0.5f;
 	bool canBeChanged = true;
