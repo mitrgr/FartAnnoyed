@@ -47,13 +47,15 @@ private:
 	Graphics gfx;
 	/********************************/
 	/*  User Variables              */
+	static constexpr int BoardH = (Graphics::ScreenHeight - 100), BoardW = (Graphics::ScreenWidth - 400);
 	Ball ball;
 	FrameTimer ft;
 	Wall wall;
 	Pad pad;
-	Brick bricks;
+	static constexpr int nPerRow = (int)(BoardW/Brick::W), nPerCol = 4, nTot = nPerRow*nPerCol;
+	Brick bricks[nTot];
 	float Updatecount=0.0f;
-	const float DelayTimer = 0.5f;
+	const float DelayTimer = 0.4f;
 	bool canBeChanged = true;
 	/********************************/
 };

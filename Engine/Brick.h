@@ -6,8 +6,9 @@
 class Brick: public Rect
 {
 public:
-	Brick()=default;
-	Brick(float x, float y, Color C);
+	Brick();
+
+	void init(float x, float y, Color C);
 
 	void Draw(Graphics& gfx) const;
 
@@ -20,9 +21,9 @@ public:
 	bool HitBallTop(const Rect& R) const;
 	bool HitBallBottom(const Rect& R) const;
 
-
-private:
 	static constexpr float H = 25, W = 50;
+private:
+	
 	bool hit = false;
 
 };
