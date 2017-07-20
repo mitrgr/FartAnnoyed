@@ -8,9 +8,9 @@ Dir(1,1)
 {
 }
 
-void Ball::UpdatePos()
+void Ball::UpdatePos(float dt)
 {
-	center += Dir.GetNormalized();
+	center += Dir.GetNormalized()*dt*Speed;
 }
 
 void Ball::Draw(Graphics& gfx) const
