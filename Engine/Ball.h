@@ -7,7 +7,7 @@
 class Ball: public Rect
 {
 public:
-	Ball(float x, float y, Color C);
+	Ball(float x, float y);
 
 	
 	void UpdatePos();
