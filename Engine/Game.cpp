@@ -26,10 +26,20 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	ball(300.0f,200.0f),
-	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)(Graphics::ScreenHeight-100), (float)(Graphics::ScreenWidth-400) ),
-	pad(300.0f, 500.0f),
-	bricks(300.0f, 100.0f, {255,0,0})
+	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)BoardH, (float)BoardW ),
+	pad(300.0f, 500.0f)
 {
+	Color col[4] = { {255,0,0}, {0,255,0}, {0,0,255}, {255,0,255} };
+	int i= 0;
+	for (int x = 0; x < nCol; x++) {
+		
+		for (int y = 0; y < nRow; y++) {
+			Color C = col[y];
+			bricks[i].init(wall.GetUL().x + Brick::W / 2.0f + Brick::W*x, wall.GetUL().y + (Brick::H / 2.0f) + Brick::H*y, C);
+			i++;
+		}
+	}
+
 }
 
 void Game::Go()
@@ -67,25 +77,30 @@ void Game::UpdateModel()
 		Updatecount = 0;
 	}
 	bool b;
-	bricks.Update(ball, b);
+	for (Brick& i : bricks) {
+		if (!i.GotHit()) {
+			i.Update(ball, b);
 
-	if (canBeChanged && ((bricks.HitBallBottom(ball) || bricks.HitBallTop(ball)))) {
-		ball.ChangeDirY((bricks.HitBallBottom(ball) || bricks.HitBallTop(ball)));
-		canBeChanged = false;
-		Updatecount = 0;
+			if (canBeChanged && ((i.HitBallBottom(ball) || i.HitBallTop(ball)))) {
+				ball.ChangeDirY((i.HitBallBottom(ball) || i.HitBallTop(ball)));
+				canBeChanged = false;
+				Updatecount = 0;
+			}
+			if (canBeChanged && (i.HitBallLeft(ball) || i.HitBallRight(ball))) {
+				ball.ChangeDirX((i.HitBallLeft(ball) || i.HitBallRight(ball)));
+				canBeChanged = false;
+				Updatecount = 0;
+			}
+		}
 	}
-	if (canBeChanged && (bricks.HitBallLeft(ball) || bricks.HitBallRight(ball))) {
-		ball.ChangeDirX((bricks.HitBallLeft(ball) || bricks.HitBallRight(ball)));
-		canBeChanged = false;
-		Updatecount = 0;
-	}
-
 
 }
 
 void Game::ComposeFrame()
 {
-	bricks.Draw(gfx);
+	for (Brick& i : bricks) {
+		i.Draw(gfx);
+	}
 	ball.Draw(gfx);
 	pad.Draw(gfx);
 	wall.Draw(gfx);

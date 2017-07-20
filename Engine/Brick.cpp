@@ -1,14 +1,20 @@
 #include "Brick.h"
-
-Brick::Brick(float x, float y, Color C):
-	Rect(x,y,H,W,C)
+Brick::Brick() : Rect(0, 0, H, W, { 0,0,0 }) 
 {
+
+}
+
+void Brick::init(float x, float y, Color C)
+{
+	center.x = x;
+	center.y = y;
+	Col = C;
 }
 
 void Brick::Draw(Graphics& gfx) const
 {
 	if (!hit) {
-		gfx.DrawRect((int)GetUL().x, (int)GetUL().y, (int)GetDR().x, (int)GetDR().y, GetC());
+		gfx.DrawRect((int)GetUL().x+1, (int)GetUL().y+1, (int)GetDR().x-1, (int)GetDR().y-1, GetC());
 	}
 }
 

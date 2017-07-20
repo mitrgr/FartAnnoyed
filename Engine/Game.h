@@ -51,9 +51,12 @@ private:
 	FrameTimer ft;
 	Wall wall;
 	Pad pad;
-	Brick bricks;
+	static constexpr float BoardH = (Graphics::ScreenHeight - 100);
+	static constexpr float BoardW = (Graphics::ScreenWidth - 400);
+	static constexpr int nCol = (int)(BoardW/Brick::W) , nRow = 4, n = nCol*nRow;
+	Brick bricks[n];
 	float Updatecount=0.0f;
-	const float DelayTimer = 0.5f;
+	const float DelayTimer = 0.4f;
 	bool canBeChanged = true;
 	/********************************/
 };
