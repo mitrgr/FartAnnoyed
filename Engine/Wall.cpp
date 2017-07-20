@@ -13,20 +13,20 @@ void Wall::Draw(Graphics& gfx) const
 	gfx.DrawBox(int(GetUL().x), int(GetUL().y) ,int( GetDR().x), int(GetDR().y), Col);
 }
 
-bool Wall::OutsideLeft(Rect R)
+bool Wall::OutsideLeft(const Rect& R) const 
 {
 	return R.GetDL().x <= GetDL().x;
 }
 
-bool Wall::OutsideRight(Rect R)
+bool Wall::OutsideRight(const Rect& R) const
 {
 	return R.GetDR().x >= GetDR().x;
 }
-bool Wall::OutsideTop(Rect R)
+bool Wall::OutsideTop(const Rect& R) const
 {
 	return R.GetUR().y <= GetUR().y;
 }
-bool Wall::OutsideBottom(Rect R)
+bool Wall::OutsideBottom(const Rect& R) const
 {
 	return R.GetDR().y >= GetDR().y;
 }

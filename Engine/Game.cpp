@@ -26,7 +26,8 @@ Game::Game( MainWindow& wnd )
 	wnd( wnd ),
 	gfx( wnd ),
 	ball(300.0f,200.0f),
-	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)(Graphics::ScreenHeight-100), (float)(Graphics::ScreenWidth-400) )
+	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)(Graphics::ScreenHeight-100), (float)(Graphics::ScreenWidth-400) ),
+	pad(300.0f, 400.0f)
 {
 }
 
@@ -41,13 +42,25 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	float dt = ft.Mark();
+	pad.Update(wnd.kbd, dt);
+	pad.KeepIn(wall.OutsideRight(pad), wall.OutsideLeft(pad));
+
 	ball.UpdatePos(dt, wall);
+
 	ball.ChangeDirX((wall.OutsideLeft(ball) || wall.OutsideRight(ball)));
 	ball.ChangeDirY((wall.OutsideTop(ball) || wall.OutsideBottom(ball)));
+
+	ball.ChangeDirX((pad.HitBallLeft(ball) || pad.HitBallRight(ball)));
+	ball.ChangeDirY((pad.HitBallBottom(ball) || pad.HitBallTop(ball)));
+
+
 }
 
 void Game::ComposeFrame()
 {
-	wall.Draw(gfx);
+	
 	ball.Draw(gfx);
+	pad.Draw(gfx);
+	wall.Draw(gfx);
+
 }

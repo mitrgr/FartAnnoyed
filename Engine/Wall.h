@@ -9,13 +9,13 @@ public:
 	
 	void Draw(Graphics& gfx) const;
 
-	bool Wall::OutsideLeft(Rect R);
+	bool Wall::OutsideLeft(const Rect& R) const;
 	
-	bool Wall::OutsideRight(Rect R);
+	bool Wall::OutsideRight(const Rect& R) const;
 	
-	bool Wall::OutsideTop(Rect R);
+	bool Wall::OutsideTop(const Rect& R) const;
 	
-	bool Wall::OutsideBottom(Rect R);
+	bool Wall::OutsideBottom(const Rect& R) const;
 	
 
 private:
