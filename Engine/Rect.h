@@ -7,11 +7,11 @@
 class Rect
 {
 public:
-	Rect( int x, int y, int H, int W, Color C);
+	Rect( float x, float y, float H, float W, Color C);
 
 	Vec2 GetCenter() const;
-	const int GetH() const;
-	const int GetW() const;
+	const float GetH() const;
+	const float GetW() const;
 	const Vec2 GetUR() const;
 	const Vec2 GetUL() const;
 	const Vec2 GetDR() const;
@@ -21,7 +21,7 @@ public:
 
 private:
 	Vec2 center;
-	const int Height, Width;
+	const float Height, Width;
 	Color Col;
 };
 
