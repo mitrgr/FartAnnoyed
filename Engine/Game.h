@@ -50,5 +50,8 @@ private:
 	FrameTimer ft;
 	Wall wall;
 	Pad pad;
+	float Updatecount=0.0f;
+	const float DelayTimer = 0.5f;
+	bool canBeChanged = true;
 	/********************************/
 };

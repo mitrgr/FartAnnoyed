@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ball(300.0f,200.0f),
 	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)(Graphics::ScreenHeight-100), (float)(Graphics::ScreenWidth-400) ),
-	pad(300.0f, 400.0f)
+	pad(300.0f, 500.0f)
 {
 }
 
@@ -42,17 +42,29 @@ void Game::Go()
 void Game::UpdateModel()
 {
 	float dt = ft.Mark();
+	Updatecount += dt;
 	pad.Update(wnd.kbd, dt);
 	pad.KeepIn(wall.OutsideRight(pad), wall.OutsideLeft(pad));
 
 	ball.UpdatePos(dt, wall);
-
+	
 	ball.ChangeDirX((wall.OutsideLeft(ball) || wall.OutsideRight(ball)));
 	ball.ChangeDirY((wall.OutsideTop(ball) || wall.OutsideBottom(ball)));
+	if (Updatecount >= DelayTimer) {
+		canBeChanged = true;
+		Updatecount = DelayTimer;
+	}
 
-	ball.ChangeDirX((pad.HitBallLeft(ball) || pad.HitBallRight(ball)));
-	ball.ChangeDirY((pad.HitBallBottom(ball) || pad.HitBallTop(ball)));
-
+	if (canBeChanged && ((pad.HitBallBottom(ball) || pad.HitBallTop(ball)))) {
+		ball.ChangeDirY((pad.HitBallBottom(ball) || pad.HitBallTop(ball)));
+		canBeChanged = false;
+		Updatecount = 0;
+	}
+	if (canBeChanged && (pad.HitBallLeft(ball) || pad.HitBallRight(ball))){
+		ball.ChangeDirX((pad.HitBallLeft(ball) || pad.HitBallRight(ball)));
+		canBeChanged = false;
+		Updatecount = 0;
+	}
 
 }
 
