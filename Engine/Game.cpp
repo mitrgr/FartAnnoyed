@@ -27,7 +27,9 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ball(300.0f,200.0f),
 	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)BoardH, (float)BoardW ),
-	pad(300.0f, 500.0f)
+	pad(300.0f, 500.0f),
+	soundPad(L"Sounds\\arkpad.wav"),
+	soundBrick(L"Sounds\\arkbrick.wav")
 {
 	Color col[4] = { {255,0,0}, {0,255,0}, {0,0,255}, {255,0,255} };
 	int i= 0;
@@ -68,12 +70,14 @@ void Game::UpdateModel()
 
 	if (canBeChanged && ((pad.HitBallBottom(ball) || pad.HitBallTop(ball)))) {
 		ball.ChangeDirY((pad.HitBallBottom(ball) || pad.HitBallTop(ball)));
+		soundPad.Play();
 		canBeChanged = false;
 		Updatecount = 0;
 	}
 	if (canBeChanged && (pad.HitBallLeft(ball) || pad.HitBallRight(ball))){
 		ball.ChangeDirX((pad.HitBallLeft(ball) || pad.HitBallRight(ball)));
 		canBeChanged = false;
+		soundPad.Play();
 		Updatecount = 0;
 	}
 	bool b;
@@ -83,11 +87,13 @@ void Game::UpdateModel()
 
 			if (canBeChanged && ((i.HitBallBottom(ball) || i.HitBallTop(ball)))) {
 				ball.ChangeDirY((i.HitBallBottom(ball) || i.HitBallTop(ball)));
+				soundBrick.Play();
 				canBeChanged = false;
 				Updatecount = 0;
 			}
 			if (canBeChanged && (i.HitBallLeft(ball) || i.HitBallRight(ball))) {
 				ball.ChangeDirX((i.HitBallLeft(ball) || i.HitBallRight(ball)));
+				soundBrick.Play();
 				canBeChanged = false;
 				Updatecount = 0;
 			}

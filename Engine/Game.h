@@ -28,6 +28,7 @@
 #include "Wall.h"
 #include "Pad.h"
 #include "Brick.h"
+#include "Sound.h"
 
 class Game
 {
@@ -58,5 +59,7 @@ private:
 	float Updatecount=0.0f;
 	const float DelayTimer = 0.4f;
 	bool canBeChanged = true;
+	Sound soundPad;
+	Sound soundBrick;
 	/********************************/
 };
