@@ -7,7 +7,7 @@ Ball::Ball(float x, float y):
 	Rect(x, y, 14.0f, 14.0f, {0,0,0}),
 Dir(1,1)
 {
-	Speed = 120.0f;
+	Speed = 150.0f;
 }
 Ball::Ball(float x, float y, const float s) :
 	Rect(x, y, 14.0f, 14.0f, { 0,0,0 }),
@@ -32,7 +32,7 @@ void Ball::ChangeDirX(bool cange)
 void Ball::ChangeDirYPad(const Rect & pad)
 {
 	Dir.y = -1.0f/(5*(std::abs(center.x - pad.GetCenter().x)+2.0f)/pad.GetW());
-	Speed = 120.0f + std::abs(center.x - pad.GetCenter().x)/2.0f;
+	Speed = 150.0f + 5*(std::abs(center.x - pad.GetCenter().x)+2);
 }
 
 void Ball::ChangeDirXPad(const Rect & pad)

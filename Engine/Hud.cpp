@@ -1,5 +1,5 @@
 #include "Hud.h"
-
+#include "SpriteCodex.h"
 
 
 Hud::Hud()
@@ -41,6 +41,11 @@ bool Hud::IsBallStartet() const
 void Hud::StartBall()
 {
 	BallIsStartet = true;
+}
+
+void Hud::DrawGameOver(Graphics & gfx)
+{
+	SpriteCodex::DrawGameOver(350,200,gfx);
 }
 
 

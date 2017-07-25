@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ball(300.0f,200.0f),
 	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)BoardH, (float)BoardW ),
-	pad(600.0f, 500.0f),
+	pad(500.0f, 500.0f),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundBrick(L"Sounds\\arkbrick.wav")
 {
@@ -122,12 +122,16 @@ void Game::UpdateModel()
 
 void Game::ComposeFrame()
 {
+	
+	if (hud.IsGameOver()) {
+		hud.DrawGameOver(gfx);
+	}
 	for (Brick& i : bricks) {
 		i.Draw(gfx);
 	}
 	ball.Draw(gfx);
 	pad.Draw(gfx);
 	wall.Draw(gfx);
-
+	
 
 }

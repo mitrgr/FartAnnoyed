@@ -11,6 +11,8 @@ public:
 	void NewGame(Ball & ball);
 	bool IsBallStartet() const;
 	void StartBall();
+	void DrawGameOver( Graphics & gfx);
+
 
 private:
 	int startlives = 3;
