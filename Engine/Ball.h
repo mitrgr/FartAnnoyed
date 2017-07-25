@@ -13,6 +13,9 @@ public:
 	void ChangeDirY(bool cange);
 	void ChangeDirX(bool cange);
 
+	void ChangeDirYPad(const Rect& pad);
+	void ChangeDirXPad(const Rect& pad);
+
 	void NewPos(const float x, const float y);
 
 	void UpdatePos(float dt, const Rect& border);

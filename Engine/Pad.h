@@ -21,8 +21,8 @@ public:
 
 private:
 	static constexpr float Height = 10.0f;
-	static constexpr float Width = 100.0f;
-	const float Speed = 60.0f;
+	static constexpr float Width = 70.0f;
+	const float Speed = 100.0f;
 	const float maxx = 600.0f , minx=200.0f;
 };
 

@@ -1,5 +1,6 @@
 #include "Ball.h"
 #include "SpriteCodex.h"
+#include <math.h>
 
 
 Ball::Ball(float x, float y):
@@ -26,6 +27,17 @@ void Ball::ChangeDirX(bool cange)
 	if (cange) {
 		Dir.x *= -1;
 	}
+}
+
+void Ball::ChangeDirYPad(const Rect & pad)
+{
+	Dir.y = -1.0f/(5*(std::abs(center.x - pad.GetCenter().x)+2.0f)/pad.GetW());
+	Speed = 120.0f + std::abs(center.x - pad.GetCenter().x)/2.0f;
+}
+
+void Ball::ChangeDirXPad(const Rect & pad)
+{
+	Dir.x *= -1.0f / (10.0f*(std::abs(center.y - pad.GetCenter().y) + 2.0f) / pad.GetW());
 }
 
 void Ball::NewPos(const float x, const float y)

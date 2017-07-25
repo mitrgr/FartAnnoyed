@@ -27,7 +27,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	ball(300.0f,200.0f),
 	wall((float)(Graphics::ScreenWidth/2),(float)(Graphics::ScreenHeight/2),(float)BoardH, (float)BoardW ),
-	pad(300.0f, 500.0f),
+	pad(600.0f, 500.0f),
 	soundPad(L"Sounds\\arkpad.wav"),
 	soundBrick(L"Sounds\\arkbrick.wav")
 {
@@ -87,13 +87,13 @@ void Game::UpdateModel()
 	}
 
 	if (canBeChanged && ((pad.HitBallBottom(ball) || pad.HitBallTop(ball)))) {
-		ball.ChangeDirY((pad.HitBallBottom(ball) || pad.HitBallTop(ball)));
+		ball.ChangeDirYPad(pad);
 		soundPad.Play();
 		canBeChanged = false;
 		Updatecount = 0;
 	}
 	if (canBeChanged && (pad.HitBallLeft(ball) || pad.HitBallRight(ball))){
-		ball.ChangeDirX((pad.HitBallLeft(ball) || pad.HitBallRight(ball)));
+		ball.ChangeDirXPad(pad);
 		canBeChanged = false;
 		soundPad.Play();
 		Updatecount = 0;
@@ -107,13 +107,13 @@ void Game::UpdateModel()
 				ball.ChangeDirY((i.HitBallBottom(ball) || i.HitBallTop(ball)));
 				soundBrick.Play();
 				canBeChanged = false;
-				Updatecount = 0;
+				Updatecount = 0.2f;
 			}
 			if (canBeChanged && (i.HitBallLeft(ball) || i.HitBallRight(ball))) {
 				ball.ChangeDirX((i.HitBallLeft(ball) || i.HitBallRight(ball)));
 				soundBrick.Play();
 				canBeChanged = false;
-				Updatecount = 0;
+				Updatecount = 0.2f;
 			}
 		}
 	}
