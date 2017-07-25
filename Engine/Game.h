@@ -29,6 +29,7 @@
 #include "Pad.h"
 #include "Brick.h"
 #include "Sound.h"
+#include "Hud.h"
 
 class Game
 {
@@ -61,5 +62,6 @@ private:
 	bool canBeChanged = true;
 	Sound soundPad;
 	Sound soundBrick;
+	Hud hud;
 	/********************************/
 };

@@ -28,6 +28,12 @@ void Ball::ChangeDirX(bool cange)
 	}
 }
 
+void Ball::NewPos(const float x, const float y)
+{
+	center.x = x;
+	center.y = y;
+}
+
 void Ball::UpdatePos(float dt, const Rect& border)
 {
 	center += Dir.GetNormalized()*dt*Speed;

@@ -47,7 +47,22 @@ Game::Game( MainWindow& wnd )
 void Game::Go()
 {
 	gfx.BeginFrame();	
-	UpdateModel();
+	if (!(hud.IsGameOver())) {
+		if (hud.IsBallStartet()) {
+			UpdateModel();
+		}
+		else if (wnd.kbd.KeyIsPressed(VK_RETURN) ){
+			hud.StartBall();
+		}
+		else {
+			ft.Mark();
+		}
+	}
+	else {
+		if (wnd.kbd.KeyIsPressed(VK_RETURN)) {
+			hud.NewGame(ball);
+		}
+	}
 	ComposeFrame();
 	gfx.EndFrame();
 }
@@ -62,7 +77,10 @@ void Game::UpdateModel()
 	ball.UpdatePos(dt, wall);
 	
 	ball.ChangeDirX((wall.OutsideLeft(ball) || wall.OutsideRight(ball)));
-	ball.ChangeDirY((wall.OutsideTop(ball) || wall.OutsideBottom(ball)));
+	ball.ChangeDirY((wall.OutsideTop(ball)));
+	if (wall.OutsideBottom(ball)) {
+		hud.HitBottom(ball);
+	}
 	if (Updatecount >= DelayTimer) {
 		canBeChanged = true;
 		Updatecount = DelayTimer;
